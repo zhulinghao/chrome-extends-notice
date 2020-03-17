@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+    <div id="time-planning">
+        <div class="header">
+            <el-button size="mini" v-if="pageType !== 'setting'" round @click="back">返回</el-button>
+            <div class="title">时间规划</div>
+        </div>
+        <div class="content">
+            <div v-if="pageType === 'setting'">
+                <el-row>
+                    <el-col :span="12">
+                        <el-input size="mini" class="m-size" type="text" placeholder="事件" v-model="name" ></el-input>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-select size="mini" class="m-size" v-model="timeDimension" clearable placeholder="维度">
+                            <el-option
+                                v-for="item in timeDimensionOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+                <el-row class="mt-1">
+                    <el-col :span="18">
+                        <el-time-select
+                            :picker-options="{
+                                start: '00:00',
+                                step: '00:15',
+                                end: '23:30'
+                            }"
+                            v-if="timeDimension === 4"
+                            size="mini"
+                            class="m-size"
+                            v-model="time"
+                            placeholder="选择时间">
+                        </el-time-select>
+                        <el-date-picker
+                            v-else
+                            size="mini"
+                            class="m-size"
+                            type="date"
+                            placeholder="选择日期"
+                            format="yyyy 年 MM 月 dd 日"
+                            v-model="time"
+                            value-format="yyyy-MM-dd">
+                        </el-date-picker>
+                    </el-col>
+                    <el-col :span="4">
+                        <el-button size="mini" class="tp-btn" @click="addPlanning">添加</el-button>
+                    </el-col>
+                </el-row>
+                <div class="list">
+                    <div class="list-item" v-for="(item, index) in list" :key="index" @click="changePage(item.id)">
+                        <i @click.stop="rmItem(item.id)" class="el-icon-close rm"></i>
+                        <div class="fs-16">{{item.name}}</div>
+                        <div>{{TIME_DIMENSION[item.timeDimension]}} - {{item.time}}</div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="pageType === 'page' && currentData.time" class="page-item">
+                <div class="fs-26 fw-700">{{currentData.name}}</div>
+                <div>{{TIME_DIMENSION[currentData.timeDimension]}} - {{currentData.time}}</div>
+                <div>{{currentDes}}</div>
+                <div>{{timeDuration}}</div>
+            </div>
+        </div>
+    </div>
+    <script src="js/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/index.js"></script>
+    <script src="js/popup.js"></script>
+</body>
+</html>
