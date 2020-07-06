@@ -37,7 +37,7 @@
         "default_popup": "popup.html"
     },*/
     // 需要直接注入页面的JS
-    "content_scripts": 
+    "content_scripts":
     [
         {
             //"matches": ["http://*/*", "https://*/*"],

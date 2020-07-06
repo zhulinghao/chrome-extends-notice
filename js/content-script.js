@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('我被执行了！');
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     console.log('我被执行了！');
+// });
 
 // 和bg通信
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)

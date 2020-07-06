@@ -17,31 +17,30 @@ const app = new Vue({
 
         // setting
         list: [],
-        time: '',
-        name: '',
+        time: null,
+        name: null,
         timeDimensionOptions: [
             {
-                value: 0,
-                label: '默认'
+                value: 4,
+                label: '每天'
             },
             {
                 value: 1,
                 label: '每年',
                 disabled: true
-            }, {
-                value: 2,
-                label: '每月',
-                disabled: true
-            }, {
-                value: 3,
-                label: '每周',
-                disabled: true
-            }, {
-                value: 4,
-                label: '每天'
-            }
+            },
+            // {
+            //     value: 2,
+            //     label: '每月',
+            //     disabled: true
+            // },
+            // {
+            //     value: 3,
+            //     label: '每周',
+            //     disabled: true
+            // }
         ],
-        timeDimension: 0,
+        timeDimension: 4,
         // page
         currentData: {
             time: null,
@@ -62,12 +61,13 @@ const app = new Vue({
         addPlanning() {
             const h = this.$createElement;
             let { name, time, timeDimension } = this;
+            if(!name) {
+              alert('名称必填')
+              return
+            }
             let id = this.genID(12);
             if(this.list.length >= 5) {
-                this.$message({
-                    title: '提示',
-                    message: h('b', { style: 'color: #fff'}, '不能超过5个哦')
-                });
+                alert('不能超过5')
                 return;
             }
             this.list.push({ id, name, time, timeDimension });
@@ -124,6 +124,5 @@ const app = new Vue({
         chrome.storage.sync.get(["list"], (r) => {
             this.list = r.list || [];
         });
-        
     }
 });

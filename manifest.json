@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "时间规划",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "时间规划",
     "icons":
     {
@@ -13,13 +13,13 @@
     {
         "scripts": ["js/moment.js", "js/background.js"]
     },
-    "browser_action": 
+    "browser_action":
     {
         "default_icon": "img/icon.png",
         "default_title": "Click launch Something",
         "default_popup": "popup.html"
     },
-    "content_scripts": 
+    "content_scripts":
     [
         {
             "matches": ["<all_urls>"],

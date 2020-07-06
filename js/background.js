@@ -33,6 +33,9 @@
 // chrome.browserAction.setBadgeText({text: 'new'});
 // chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
 
+/**
+ * 自定义菜单百度搜索
+ */
 chrome.contextMenus.create({
     title: "使用百度搜索：%s",
     contexts: ["selection"],  // 只有当选中文字才会出现此菜单
@@ -59,5 +62,5 @@ setInterval(() => {
                 }
             }
         });
-    }); 
+    });
 }, 10000);
